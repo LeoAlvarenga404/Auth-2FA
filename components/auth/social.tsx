@@ -13,7 +13,7 @@ export function Social() {
         variant={"outline"}
         onClick={() => {}}
       >
-        <FcGoogle/>
+        <FcGoogle size={24}/>
       </Button>
       <Button
         size="lg"
@@ -21,7 +21,7 @@ export function Social() {
         variant={"outline"}
         onClick={() => {}}
       >
-        <FaGithub/>
+        <FaGithub size={24}/>
       </Button>
     </div>
   )

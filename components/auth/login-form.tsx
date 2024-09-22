@@ -1,12 +1,5 @@
 "use client";
 
-import { CardWrapper } from "@/components/auth/card-wrapper";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { LoginSchema } from "@/schemas";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -15,6 +8,17 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { CardWrapper } from "@/components/auth/card-wrapper";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { LoginSchema } from "@/schemas";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { FormError } from "@/components/form-error";
+import { FormSuccess } from "@/components/form-success";
+
+
 
 export function LoginForm() {
   const form = useForm<z.infer<typeof LoginSchema>>({
@@ -25,6 +29,10 @@ export function LoginForm() {
     },
   });
 
+  function onSubmit(values: z.infer<typeof LoginSchema>) {
+    console.log(values)
+  }
+
   return (
     <CardWrapper
       headerLabel="Welcome back"
@@ -33,7 +41,7 @@ export function LoginForm() {
       showSocial
     >
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(() => {})} className="space-y-6">
+        <form onSubmit={form.handleSubmit((onSubmit))} className="space-y-6">
           <div className="space-y-4">
             <FormField
               control={form.control}
@@ -44,7 +52,7 @@ export function LoginForm() {
                   <FormControl>
                     <Input
                       {...field}
-                      placeholder="leo@example.com"
+                      placeholder="email@example.com"
                       type="email"
                     />
                   </FormControl>
@@ -66,6 +74,8 @@ export function LoginForm() {
               )}
             />
           </div>
+          <FormError message="" />
+          <FormSuccess message=""/>
           <Button
             type="submit"
             className="w-full"
